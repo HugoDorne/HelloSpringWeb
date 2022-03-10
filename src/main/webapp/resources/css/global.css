@@ -1,0 +1,15 @@
+:root {
+    /*Colors*/
+    --main-bg-color: #C7CBD1;
+    --secondary-bg-color: #FAEDC8;
+    --main-color: #102648;
+    --main-color-hover: #183a6d;
+    --secondary-color: #FAB600;
+    --charcoal: #393F47;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--main-bg-color);
+    margin: 0;
+}
