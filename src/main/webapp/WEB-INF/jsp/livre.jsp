@@ -8,28 +8,27 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
-
     </head>
 
     <body class="bg-white">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <a class="navbar-brand" href="accueil">
+            <a class="navbar-brand ms-2 m-0" href="accueil">
                 <img src="<c:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav m-auto pr-5">
+                <div class="navbar-nav m-auto" style="padding-right: 7rem">
                     <a class="nav-item nav-link" href="utilisateurs">Utilisateurs</a>
                     <a class="nav-item nav-link" href="livres">Livres</a>
+                    <a class="nav-item nav-link" href="emprunts">Emprunts</a>
                 </div>
             </div>
         </nav>
@@ -38,12 +37,14 @@
     <div class="d-flex" style="height: 89vh">
         <div class="card w-50 m-auto my-auto">
             <div class="card-body shadow text-center">
-                <h1>Création / Modification de livre</h1>
+                <h1 class="mb-4">Création / Modification de livre</h1>
 
-                <form class="text-left">
-                    <div class="form-group">
-                        <label class="mb-1" for="id">#</label>
-                        <input type="text" class="form-control mb-2" id="id" placeholder="127" readonly>
+                <form class="text-start">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="number">#</label>
+                        </div>
+                        <input type="text" class="form-control mb-2" id="number" value="127" disabled>
                     </div>
 
                     <div class="form-group">
@@ -53,7 +54,7 @@
 
                     <div class="form-group">
                         <label class="mb-1" for="auteur">Auteur</label>
-                        <input type="text" class="form-control mb-2" id="auteur" placeholder="Auteur">
+                        <input type="text" class="form-control mb-4" id="auteur" placeholder="Auteur">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Sauvegarder</button>
@@ -64,15 +65,9 @@
 
 
     <%-- JS pour Bootstrap --%>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous">
+    </script>
     </body>
 </html>
-
