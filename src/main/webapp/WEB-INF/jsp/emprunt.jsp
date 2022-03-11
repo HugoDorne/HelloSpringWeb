@@ -3,18 +3,17 @@
 <!doctype html>
 <html>
     <head>
-        <title>Bibliothèque Centrale</title>
+        <title>Emprunt</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link href="<c:url value="/resources/css/global.css" />" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
               rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
     </head>
 
-    <body class="bg-white vh-100">
+    <body class="bg-white">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
             <a class="navbar-brand ms-2 m-0" href="accueil">
@@ -35,9 +34,38 @@
         </nav>
     </header>
 
-    <div style="margin-top: 40vh">
-        <div class="text-center">
-            <h1 class="display-1">Bienvenue</h1>
+    <div class="d-flex" style="height: 89vh">
+        <div class="card w-50 m-auto my-auto">
+            <div class="card-body shadow text-center">
+                <h1 class="mb-4">Création d'un emprunt</h1>
+
+                <form class="text-start">
+                    <div class="form-group">
+                        <label for="emprunteur" class="form-label">Emprunteur</label>
+                        <input class="form-control" list="emprunteurOptions" id="emprunteur" placeholder="Prénom NOM">
+                        <datalist id="emprunteurOptions">
+                            <option value="Hugo DORNE">
+                            <option value="Mickaël FONTES">
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="livre" class="form-label">Livre emprunté</label>
+                        <input class="form-control" list="livreOptions" id="livre" placeholder="Prénom NOM">
+                        <datalist id="livreOptions">
+                            <option value="La Bible, Jésus">
+                            <option value="Atomic Habits, Michael Scott">
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="mb-1" for="dateEmprunt">Date de l'emprunt</label>
+                        <input type="date" class="form-control mb-4" id="dateEmprunt">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Sauvegarder</button>
+                </form>
+            </div>
         </div>
     </div>
 
