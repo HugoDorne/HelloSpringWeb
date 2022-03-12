@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class Livre {
+public class AccueilController {
 
-    @GetMapping("livre")
-    public String getIndex(){
-        return "livre";
+    @GetMapping("accueil")
+    public String getAccueil(){
+        return "accueil";
     }
 }
