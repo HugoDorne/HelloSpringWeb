@@ -1,33 +1,42 @@
 package com.github.hugodorne.model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Objects;
 
 @Entity
-@Table(name = "emprunt", schema = "public", catalog = "ddft0v81e8ep51")
+@Table(name = "emprunt")
 public class EmpruntEntity {
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "id", nullable = false)
 	private int id;
+
 	@Basic
-	@Column(name = "personne_id", nullable = true)
-	private Integer personneId;
+	@Column(name = "personne_id", nullable = false)
+	private int personneId;
+
 	@Basic
-	@Column(name = "livre_id", nullable = true)
-	private Integer livreId;
+	@Column(name = "livre_id", nullable = false)
+	private int livreId;
+
 	@Basic
-	@Column(name = "date_emprunt", nullable = true)
-	private Timestamp dateEmprunt;
+	@Column(name = "date_emprunt", nullable = false)
+	private Instant dateEmprunt;
+
 	@Basic
-	@Column(name = "date_retour", nullable = true)
-	private Timestamp dateRetour;
+	@Column(name = "date_retour")
+	private Instant dateRetour;
+
 	@ManyToOne
-	@JoinColumn(name = "personne_id", referencedColumnName = "id")
+	@JoinColumn(name = "personne_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	private PersonneEntity personneByPersonneId;
+
 	@ManyToOne
-	@JoinColumn(name = "livre_id", referencedColumnName = "id")
+	@JoinColumn(name = "livre_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	private LivreEntity livreByLivreId;
+
 
 	public int getId() {
 		return id;
@@ -37,35 +46,35 @@ public class EmpruntEntity {
 		this.id = id;
 	}
 
-	public Integer getPersonneId() {
+	public int getPersonneId() {
 		return personneId;
 	}
 
-	public void setPersonneId(Integer personneId) {
+	public void setPersonneId(int personneId) {
 		this.personneId = personneId;
 	}
 
-	public Integer getLivreId() {
+	public int getLivreId() {
 		return livreId;
 	}
 
-	public void setLivreId(Integer livreId) {
+	public void setLivreId(int livreId) {
 		this.livreId = livreId;
 	}
 
-	public Timestamp getDateEmprunt() {
+	public Instant getDateEmprunt() {
 		return dateEmprunt;
 	}
 
-	public void setDateEmprunt(Timestamp dateEmprunt) {
+	public void setDateEmprunt(Instant dateEmprunt) {
 		this.dateEmprunt = dateEmprunt;
 	}
 
-	public Timestamp getDateRetour() {
+	public Instant getDateRetour() {
 		return dateRetour;
 	}
 
-	public void setDateRetour(Timestamp dateRetour) {
+	public void setDateRetour(Instant dateRetour) {
 		this.dateRetour = dateRetour;
 	}
 
@@ -77,19 +86,17 @@ public class EmpruntEntity {
 		EmpruntEntity that = (EmpruntEntity) o;
 
 		if (id != that.id) return false;
-		if (personneId != null ? !personneId.equals(that.personneId) : that.personneId != null) return false;
-		if (livreId != null ? !livreId.equals(that.livreId) : that.livreId != null) return false;
-		if (dateEmprunt != null ? !dateEmprunt.equals(that.dateEmprunt) : that.dateEmprunt != null) return false;
-		if (dateRetour != null ? !dateRetour.equals(that.dateRetour) : that.dateRetour != null) return false;
-
-		return true;
+		if (personneId != that.personneId) return false;
+		if (livreId != that.livreId) return false;
+		if (!Objects.equals(dateEmprunt, that.dateEmprunt)) return false;
+		return Objects.equals(dateRetour, that.dateRetour);
 	}
 
 	@Override
 	public int hashCode() {
 		int result = id;
-		result = 31 * result + (personneId != null ? personneId.hashCode() : 0);
-		result = 31 * result + (livreId != null ? livreId.hashCode() : 0);
+		result = 31 * result + personneId;
+		result = 31 * result + livreId;
 		result = 31 * result + (dateEmprunt != null ? dateEmprunt.hashCode() : 0);
 		result = 31 * result + (dateRetour != null ? dateRetour.hashCode() : 0);
 		return result;

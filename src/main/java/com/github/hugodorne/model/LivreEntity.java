@@ -1,29 +1,39 @@
 package com.github.hugodorne.model;
 
+import com.github.hugodorne.enumeration.Disponibilite;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
-@Table(name = "livre", schema = "public", catalog = "ddft0v81e8ep51")
+@Table(name = "livre")
 public class LivreEntity {
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "id", nullable = false)
 	private int id;
+
 	@Basic
-	@Column(name = "titre", nullable = true, length = -1)
+	@Column(name = "titre", nullable = false)
 	private String titre;
+
 	@Basic
-	@Column(name = "auteur", nullable = true)
-	private Integer auteur;
+	@Column(name = "auteur", nullable = false)
+	private int auteur;
+
 	@Basic
-	@Column(name = "disponibilite", nullable = true)
-	private Object disponibilite;
+	@Column(name = "disponibilite", nullable = false)
+	private Disponibilite disponibilite;
+
 	@OneToMany(mappedBy = "livreByLivreId")
 	private Collection<EmpruntEntity> empruntsById;
+
 	@ManyToOne
-	@JoinColumn(name = "auteur", referencedColumnName = "id")
+	@JoinColumn(name = "auteur", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	private PersonneEntity personneByAuteur;
+
 
 	public int getId() {
 		return id;
@@ -41,19 +51,19 @@ public class LivreEntity {
 		this.titre = titre;
 	}
 
-	public Integer getAuteur() {
+	public int getAuteur() {
 		return auteur;
 	}
 
-	public void setAuteur(Integer auteur) {
+	public void setAuteur(int auteur) {
 		this.auteur = auteur;
 	}
 
-	public Object getDisponibilite() {
+	public Disponibilite getDisponibilite() {
 		return disponibilite;
 	}
 
-	public void setDisponibilite(Object disponibilite) {
+	public void setDisponibilite(Disponibilite disponibilite) {
 		this.disponibilite = disponibilite;
 	}
 
@@ -65,19 +75,16 @@ public class LivreEntity {
 		LivreEntity that = (LivreEntity) o;
 
 		if (id != that.id) return false;
-		if (titre != null ? !titre.equals(that.titre) : that.titre != null) return false;
-		if (auteur != null ? !auteur.equals(that.auteur) : that.auteur != null) return false;
-		if (disponibilite != null ? !disponibilite.equals(that.disponibilite) : that.disponibilite != null)
-			return false;
-
-		return true;
+		if (auteur != that.auteur) return false;
+		if (!Objects.equals(titre, that.titre)) return false;
+		return Objects.equals(disponibilite, that.disponibilite);
 	}
 
 	@Override
 	public int hashCode() {
 		int result = id;
 		result = 31 * result + (titre != null ? titre.hashCode() : 0);
-		result = 31 * result + (auteur != null ? auteur.hashCode() : 0);
+		result = 31 * result + auteur;
 		result = 31 * result + (disponibilite != null ? disponibilite.hashCode() : 0);
 		return result;
 	}

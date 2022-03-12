@@ -1,27 +1,34 @@
 package com.github.hugodorne.model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Objects;
 
 @Entity
-@Table(name = "utilisateurs", schema = "public", catalog = "ddft0v81e8ep51")
+@Table(name = "utilisateurs")
 public class UtilisateursEntity {
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "id", nullable = false)
 	private int id;
+
 	@Basic
-	@Column(name = "date_inscription", nullable = true)
-	private Timestamp dateInscription;
+	@Column(name = "date_inscription", nullable = false)
+	private Instant dateInscription;
+
 	@Basic
-	@Column(name = "admin", nullable = true)
-	private Boolean admin;
+	@Column(name = "admin", nullable = false)
+	private boolean admin;
+
 	@Basic
-	@Column(name = "personne_id", nullable = true)
-	private Integer personneId;
+	@Column(name = "personne_id", nullable = false)
+	private int personneId;
+
 	@ManyToOne
-	@JoinColumn(name = "personne_id", referencedColumnName = "id")
+	@JoinColumn(name = "personne_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	private PersonneEntity personneByPersonneId;
+
 
 	public int getId() {
 		return id;
@@ -31,27 +38,27 @@ public class UtilisateursEntity {
 		this.id = id;
 	}
 
-	public Timestamp getDateInscription() {
+	public Instant getDateInscription() {
 		return dateInscription;
 	}
 
-	public void setDateInscription(Timestamp dateInscription) {
+	public void setDateInscription(Instant dateInscription) {
 		this.dateInscription = dateInscription;
 	}
 
-	public Boolean getAdmin() {
+	public boolean isAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(Boolean admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
-	public Integer getPersonneId() {
+	public int getPersonneId() {
 		return personneId;
 	}
 
-	public void setPersonneId(Integer personneId) {
+	public void setPersonneId(int personneId) {
 		this.personneId = personneId;
 	}
 
@@ -63,20 +70,17 @@ public class UtilisateursEntity {
 		UtilisateursEntity that = (UtilisateursEntity) o;
 
 		if (id != that.id) return false;
-		if (dateInscription != null ? !dateInscription.equals(that.dateInscription) : that.dateInscription != null)
-			return false;
-		if (admin != null ? !admin.equals(that.admin) : that.admin != null) return false;
-		if (personneId != null ? !personneId.equals(that.personneId) : that.personneId != null) return false;
-
-		return true;
+		if (admin != that.admin) return false;
+		if (personneId != that.personneId) return false;
+		return Objects.equals(dateInscription, that.dateInscription);
 	}
 
 	@Override
 	public int hashCode() {
 		int result = id;
 		result = 31 * result + (dateInscription != null ? dateInscription.hashCode() : 0);
-		result = 31 * result + (admin != null ? admin.hashCode() : 0);
-		result = 31 * result + (personneId != null ? personneId.hashCode() : 0);
+		result = 31 * result + (admin ? 1 : 0);
+		result = 31 * result + personneId;
 		return result;
 	}
 

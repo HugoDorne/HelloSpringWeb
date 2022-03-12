@@ -1,37 +1,50 @@
 package com.github.hugodorne.model;
 
+import com.github.hugodorne.enumeration.Sexe;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
-@Table(name = "personne", schema = "public", catalog = "ddft0v81e8ep51")
+@Table(name = "personne")
 public class PersonneEntity {
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "id", nullable = false)
 	private int id;
+
 	@Basic
-	@Column(name = "nom", nullable = true, length = -1)
+	@Column(name = "nom", nullable = false)
 	private String nom;
+
 	@Basic
-	@Column(name = "prenom", nullable = true, length = -1)
+	@Column(name = "prenom", nullable = false)
 	private String prenom;
+
 	@Basic
-	@Column(name = "sexe", nullable = true)
-	private Boolean sexe;
+	@Column(name = "sexe", nullable = false)
+	private Sexe sexe;
+
 	@Basic
-	@Column(name = "date_anniversaire", nullable = true)
+	@Column(name = "date_anniversaire")
 	private Date dateAnniversaire;
+
 	@Basic
-	@Column(name = "email", nullable = true, length = -1)
+	@Column(name = "email")
 	private String email;
+
 	@OneToMany(mappedBy = "personneByPersonneId")
 	private Collection<EmpruntEntity> empruntsById;
+
 	@OneToMany(mappedBy = "personneByAuteur")
 	private Collection<LivreEntity> livresById;
+
 	@OneToMany(mappedBy = "personneByPersonneId")
 	private Collection<UtilisateursEntity> utilisateursById;
+
 
 	public int getId() {
 		return id;
@@ -57,11 +70,11 @@ public class PersonneEntity {
 		this.prenom = prenom;
 	}
 
-	public Boolean getSexe() {
+	public Sexe getSexe() {
 		return sexe;
 	}
 
-	public void setSexe(Boolean sexe) {
+	public void setSexe(Sexe sexe) {
 		this.sexe = sexe;
 	}
 
@@ -89,14 +102,12 @@ public class PersonneEntity {
 		PersonneEntity that = (PersonneEntity) o;
 
 		if (id != that.id) return false;
-		if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
-		if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
-		if (sexe != null ? !sexe.equals(that.sexe) : that.sexe != null) return false;
-		if (dateAnniversaire != null ? !dateAnniversaire.equals(that.dateAnniversaire) : that.dateAnniversaire != null)
+		if (!Objects.equals(nom, that.nom)) return false;
+		if (!Objects.equals(prenom, that.prenom)) return false;
+		if (!Objects.equals(sexe, that.sexe)) return false;
+		if (!Objects.equals(dateAnniversaire, that.dateAnniversaire))
 			return false;
-		if (email != null ? !email.equals(that.email) : that.email != null) return false;
-
-		return true;
+		return Objects.equals(email, that.email);
 	}
 
 	@Override
