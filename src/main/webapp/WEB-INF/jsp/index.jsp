@@ -19,15 +19,15 @@
             <img src="<c:url value="/resources/img/LogoCN_Q.png" />" height="50" alt="Logo Centrale Nantes"
             class="mx-auto d-block mb-2">
 
-            <form>
+            <form action="login" method="post">
                 <div class="form-group">
-                    <label for="login">Login</label>
-                    <input type="text" class="form-control" id="login" placeholder="Login">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control mb-2" id="username" placeholder="Username">
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <input type="password" class="form-control mb-4" id="password" placeholder="Password">
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Sign in</button>

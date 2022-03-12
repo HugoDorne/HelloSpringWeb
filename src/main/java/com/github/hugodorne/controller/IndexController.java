@@ -1,13 +1,32 @@
 package com.github.hugodorne.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class IndexController {
+
+    private Logger logger = LoggerFactory.getLogger("IndexController");
 
     @GetMapping("index")
     public String getIndex(){
         return "index";
     }
+
+    @PostMapping("login")
+    public String postLogin(HttpServletRequest request) {
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        logger.debug("Username : {}, Password : {}", username, password);
+
+        return "accueil";
+    }
+
 }
