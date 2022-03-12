@@ -30,4 +30,6 @@ build/
 
 .mvn/wrapper/maven-wrapper.jar
 
+### Sensitive ###
 src/main/java/com/github/hugodorne/persistence.xml
+src/main/resources/application.properties
