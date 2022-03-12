@@ -4,7 +4,6 @@ import com.github.hugodorne.enumeration.Sexe;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -16,15 +15,15 @@ public class PersonneEntity {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Basic
+	@Basic(optional = false)
 	@Column(name = "nom", nullable = false)
 	private String nom;
 
-	@Basic
+	@Basic(optional = false)
 	@Column(name = "prenom", nullable = false)
 	private String prenom;
 
-	@Basic
+	@Enumerated(EnumType.STRING)
 	@Column(name = "sexe", nullable = false)
 	private Sexe sexe;
 
@@ -35,15 +34,6 @@ public class PersonneEntity {
 	@Basic
 	@Column(name = "email")
 	private String email;
-
-	@OneToMany(mappedBy = "personneByPersonneId")
-	private Collection<EmpruntEntity> empruntsById;
-
-	@OneToMany(mappedBy = "personneByAuteur")
-	private Collection<LivreEntity> livresById;
-
-	@OneToMany(mappedBy = "personneByPersonneId")
-	private Collection<UtilisateursEntity> utilisateursById;
 
 
 	public int getId() {
@@ -121,27 +111,4 @@ public class PersonneEntity {
 		return result;
 	}
 
-	public Collection<EmpruntEntity> getEmpruntsById() {
-		return empruntsById;
-	}
-
-	public void setEmpruntsById(Collection<EmpruntEntity> empruntsById) {
-		this.empruntsById = empruntsById;
-	}
-
-	public Collection<LivreEntity> getLivresById() {
-		return livresById;
-	}
-
-	public void setLivresById(Collection<LivreEntity> livresById) {
-		this.livresById = livresById;
-	}
-
-	public Collection<UtilisateursEntity> getUtilisateursById() {
-		return utilisateursById;
-	}
-
-	public void setUtilisateursById(Collection<UtilisateursEntity> utilisateursById) {
-		this.utilisateursById = utilisateursById;
-	}
 }

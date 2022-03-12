@@ -1,9 +1,9 @@
 package com.github.hugodorne.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.hugodorne.enumeration.Disponibilite;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -15,24 +15,18 @@ public class LivreEntity {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Basic
+	@Basic(optional = false)
 	@Column(name = "titre", nullable = false)
 	private String titre;
 
-	@Basic
-	@Column(name = "auteur", nullable = false)
-	private int auteur;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "auteur", nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private PersonneEntity auteur;
 
-	@Basic
+	@Enumerated(EnumType.STRING)
 	@Column(name = "disponibilite", nullable = false)
 	private Disponibilite disponibilite;
-
-	@OneToMany(mappedBy = "livreByLivreId")
-	private Collection<EmpruntEntity> empruntsById;
-
-	@ManyToOne
-	@JoinColumn(name = "auteur", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-	private PersonneEntity personneByAuteur;
 
 
 	public int getId() {
@@ -51,11 +45,11 @@ public class LivreEntity {
 		this.titre = titre;
 	}
 
-	public int getAuteur() {
+	public PersonneEntity getAuteur() {
 		return auteur;
 	}
 
-	public void setAuteur(int auteur) {
+	public void setAuteur(PersonneEntity auteur) {
 		this.auteur = auteur;
 	}
 
@@ -84,24 +78,8 @@ public class LivreEntity {
 	public int hashCode() {
 		int result = id;
 		result = 31 * result + (titre != null ? titre.hashCode() : 0);
-		result = 31 * result + auteur;
 		result = 31 * result + (disponibilite != null ? disponibilite.hashCode() : 0);
 		return result;
 	}
 
-	public Collection<EmpruntEntity> getEmpruntsById() {
-		return empruntsById;
-	}
-
-	public void setEmpruntsById(Collection<EmpruntEntity> empruntsById) {
-		this.empruntsById = empruntsById;
-	}
-
-	public PersonneEntity getPersonneByAuteur() {
-		return personneByAuteur;
-	}
-
-	public void setPersonneByAuteur(PersonneEntity personneByAuteur) {
-		this.personneByAuteur = personneByAuteur;
-	}
 }

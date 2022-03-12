@@ -1,5 +1,7 @@
 package com.github.hugodorne.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
@@ -13,29 +15,23 @@ public class EmpruntEntity {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Basic
-	@Column(name = "personne_id", nullable = false)
-	private int personneId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "personne_id", nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private PersonneEntity personne;
 
-	@Basic
-	@Column(name = "livre_id", nullable = false)
-	private int livreId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "livre_id", nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private LivreEntity livre;
 
-	@Basic
+	@Basic(optional = false)
 	@Column(name = "date_emprunt", nullable = false)
 	private Instant dateEmprunt;
 
 	@Basic
 	@Column(name = "date_retour")
 	private Instant dateRetour;
-
-	@ManyToOne
-	@JoinColumn(name = "personne_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-	private PersonneEntity personneByPersonneId;
-
-	@ManyToOne
-	@JoinColumn(name = "livre_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-	private LivreEntity livreByLivreId;
 
 
 	public int getId() {
@@ -46,20 +42,20 @@ public class EmpruntEntity {
 		this.id = id;
 	}
 
-	public int getPersonneId() {
-		return personneId;
+	public PersonneEntity getPersonne() {
+		return personne;
 	}
 
-	public void setPersonneId(int personneId) {
-		this.personneId = personneId;
+	public void setPersonne(PersonneEntity personneId) {
+		this.personne = personneId;
 	}
 
-	public int getLivreId() {
-		return livreId;
+	public LivreEntity getLivre() {
+		return livre;
 	}
 
-	public void setLivreId(int livreId) {
-		this.livreId = livreId;
+	public void setLivre(LivreEntity livreId) {
+		this.livre = livreId;
 	}
 
 	public Instant getDateEmprunt() {
@@ -86,8 +82,8 @@ public class EmpruntEntity {
 		EmpruntEntity that = (EmpruntEntity) o;
 
 		if (id != that.id) return false;
-		if (personneId != that.personneId) return false;
-		if (livreId != that.livreId) return false;
+		if (personne != that.personne) return false;
+		if (livre != that.livre) return false;
 		if (!Objects.equals(dateEmprunt, that.dateEmprunt)) return false;
 		return Objects.equals(dateRetour, that.dateRetour);
 	}
@@ -95,26 +91,9 @@ public class EmpruntEntity {
 	@Override
 	public int hashCode() {
 		int result = id;
-		result = 31 * result + personneId;
-		result = 31 * result + livreId;
 		result = 31 * result + (dateEmprunt != null ? dateEmprunt.hashCode() : 0);
 		result = 31 * result + (dateRetour != null ? dateRetour.hashCode() : 0);
 		return result;
 	}
 
-	public PersonneEntity getPersonneByPersonneId() {
-		return personneByPersonneId;
-	}
-
-	public void setPersonneByPersonneId(PersonneEntity personneByPersonneId) {
-		this.personneByPersonneId = personneByPersonneId;
-	}
-
-	public LivreEntity getLivreByLivreId() {
-		return livreByLivreId;
-	}
-
-	public void setLivreByLivreId(LivreEntity livreByLivreId) {
-		this.livreByLivreId = livreByLivreId;
-	}
 }

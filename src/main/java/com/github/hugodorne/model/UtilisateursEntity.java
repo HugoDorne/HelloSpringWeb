@@ -1,5 +1,7 @@
 package com.github.hugodorne.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
@@ -13,21 +15,18 @@ public class UtilisateursEntity {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Basic
+	@Basic(optional = false)
 	@Column(name = "date_inscription", nullable = false)
 	private Instant dateInscription;
 
-	@Basic
+	@Basic(optional = false)
 	@Column(name = "admin", nullable = false)
 	private boolean admin;
 
-	@Basic
-	@Column(name = "personne_id", nullable = false)
-	private int personneId;
-
-	@ManyToOne
-	@JoinColumn(name = "personne_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-	private PersonneEntity personneByPersonneId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "personne_id", nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private PersonneEntity personneId;
 
 
 	public int getId() {
@@ -54,11 +53,11 @@ public class UtilisateursEntity {
 		this.admin = admin;
 	}
 
-	public int getPersonneId() {
+	public PersonneEntity getPersonneId() {
 		return personneId;
 	}
 
-	public void setPersonneId(int personneId) {
+	public void setPersonneId(PersonneEntity personneId) {
 		this.personneId = personneId;
 	}
 
@@ -80,15 +79,7 @@ public class UtilisateursEntity {
 		int result = id;
 		result = 31 * result + (dateInscription != null ? dateInscription.hashCode() : 0);
 		result = 31 * result + (admin ? 1 : 0);
-		result = 31 * result + personneId;
 		return result;
 	}
 
-	public PersonneEntity getPersonneByPersonneId() {
-		return personneByPersonneId;
-	}
-
-	public void setPersonneByPersonneId(PersonneEntity personneByPersonneId) {
-		this.personneByPersonneId = personneByPersonneId;
-	}
 }
