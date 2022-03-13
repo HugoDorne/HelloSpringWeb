@@ -38,31 +38,36 @@
     <div class="d-flex" style="height: 89vh">
         <div class="card w-50 m-auto my-auto">
             <div class="card-body shadow text-center">
-                <h1 class="mb-4">Création / Modification d'utilisateur</h1>
+                <h1 class="mb-4">Création / Modification de personne</h1>
 
-                <form class="text-start">
+                <form class="text-start" action="savePersonne" method="post">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="number">#</label>
                         </div>
-                        <input type="text" class="form-control mb-2" id="number" value="127" disabled>
+                        <input type="text" class="form-control mb-2" id="number" disabled
+                               name="id" value="${personne.id}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="prenom">Prénom</label>
-                        <input type="text" class="form-control mb-2" id="prenom" placeholder="Prénom">
+                        <input type="text" class="form-control mb-2" id="prenom" placeholder="Prénom"
+                               name="prenom" value="${personne.prenom}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="nom">Nom</label>
-                        <input type="text" class="form-control mb-2" id="nom" placeholder="Nom">
+                        <input type="text" class="form-control mb-2" id="nom" placeholder="Nom"
+                               name="nom" value="${personne.nom}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="dateNaissance">Date de naissance</label>
-                        <input type="date" class="form-control mb-4" id="dateNaissance">
+                        <input type="date" class="form-control mb-4" id="dateNaissance"
+                               name="dateNaissance" value="${personne.dateAnniversaire}">
                     </div>
 
+                    <input type="hidden" name="id" value="${personne.id}">
                     <button type="submit" class="btn btn-primary w-100">Sauvegarder</button>
                 </form>
             </div>

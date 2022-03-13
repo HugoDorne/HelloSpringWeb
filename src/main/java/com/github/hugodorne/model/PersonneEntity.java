@@ -111,4 +111,15 @@ public class PersonneEntity {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return "PersonneEntity{" +
+				"id=" + id +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", sexe=" + sexe +
+				", dateAnniversaire=" + dateAnniversaire +
+				", email='" + email + '\'' +
+				'}';
+	}
 }

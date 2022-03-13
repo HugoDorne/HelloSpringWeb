@@ -82,4 +82,13 @@ public class UtilisateurEntity {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return "UtilisateurEntity{" +
+				"id=" + id +
+				", dateInscription=" + dateInscription +
+				", admin=" + admin +
+				", personneId=" + personneId +
+				'}';
+	}
 }
