@@ -46,12 +46,26 @@ public class IndexController {
     @PostMapping("login")
     public String postLogin(User user) {
 
-        String username = user.getUsername();
-        String password = user.getPassword();
+        logger.info("postLogin()");
 
-        logger.info("Username : {}, Password : {}", username, password);
+        if (user != null) {
+            String username = user.getUsername();
+            String password = user.getPassword();
+            logger.info("Username : {}, Password : {}", username, password);
 
-        return "accueil";
+            if (username != null && password != null
+                && username.equals("admin") && password.equals("admin")) {
+
+                logger.info("Admin authentifié, redirection vers accueil");
+                return "accueil";
+            } else {
+                logger.info("Utilisateur non authentifié");
+                return "redirect:index";
+            }
+        } else {
+            logger.info("Utilisateur non présent");
+            return "redirect:index";
+        }
     }
 
 }
