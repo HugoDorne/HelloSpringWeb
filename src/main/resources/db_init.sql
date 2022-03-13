@@ -18,7 +18,7 @@ CREATE TABLE "personne" (
     "email" varchar(255)
 );
 
-CREATE TABLE "utilisateurs" (
+CREATE TABLE "utilisateur" (
     "id" SERIAL PRIMARY KEY,
     "date_inscription" timestamptz NOT NULL DEFAULT (now()),
     "admin" boolean NOT NULL DEFAULT false,
@@ -40,7 +40,7 @@ CREATE TABLE "emprunt" (
     "date_retour" timestamptz
 );
 
-ALTER TABLE "utilisateurs" ADD FOREIGN KEY ("personne_id") REFERENCES "personne" ("id");
+ALTER TABLE "utilisateur" ADD FOREIGN KEY ("personne_id") REFERENCES "personne" ("id");
 
 ALTER TABLE "livre" ADD FOREIGN KEY ("auteur") REFERENCES "personne" ("id");
 

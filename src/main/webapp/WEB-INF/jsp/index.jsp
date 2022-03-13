@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -16,18 +17,20 @@
     <body class="vh-100 d-flex bg-secondary">
     <div class="card w-25 m-auto my-auto">
         <div class="card-body shadow">
-            <img src="<c:url value="/resources/img/LogoCN_Q.png" />" height="50" alt="Logo Centrale Nantes"
+            <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="50" alt="Logo Centrale Nantes"
             class="mx-auto d-block mb-2">
 
             <form action="login" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control mb-2" id="username" placeholder="Username">
+                    <input type="text" class="form-control mb-2" placeholder="Username"
+                           id="username" name="username">
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control mb-4" id="password" placeholder="Password">
+                    <input type="password" class="form-control mb-4" placeholder="Password"
+                           id="password" name="password">
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Sign in</button>

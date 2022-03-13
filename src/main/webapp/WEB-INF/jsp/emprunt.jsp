@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -17,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
             <a class="navbar-brand ms-2 m-0" href="accueil">
-                <img src="<c:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
+                <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

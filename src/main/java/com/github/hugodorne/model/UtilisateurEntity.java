@@ -7,8 +7,8 @@ import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name = "utilisateurs")
-public class UtilisateursEntity {
+@Table(name = "utilisateur")
+public class UtilisateurEntity {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -66,7 +66,7 @@ public class UtilisateursEntity {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		UtilisateursEntity that = (UtilisateursEntity) o;
+		UtilisateurEntity that = (UtilisateurEntity) o;
 
 		if (id != that.id) return false;
 		if (admin != that.admin) return false;

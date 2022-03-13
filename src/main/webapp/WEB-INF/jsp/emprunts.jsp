@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -17,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
             <a class="navbar-brand ms-2 m-0" href="accueil">
-                <img src="<c:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
+                <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,17 +52,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach var="e" items="${emprunts}">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>M. FONTES</td>
-                        <td>Atomic Habits</td>
-                        <td>01/01/2022</td>
-                        <td>10/03/2022</td>
+                        <th scope="row">${e.id}</th>
+                        <td>${e.personne.prenom += " " += e.personne.nom}</td>
+                        <td>${"\"" += e.livre.titre += "\" de " += e.livre.auteur.prenom += " " += e.livre.auteur.nom}</td>
+                        <td>${e.dateEmprunt}</td>
+                        <td>${e.dateRetour}</td>
                         <td>
                             <svg class="me-2" style="cursor:pointer;" fill="#00FF00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
                             <svg style="cursor:pointer;" fill="#FF0000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm8.036-4.024a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path></svg>
                         </td>
                     </tr>
+                    </c:forEach>
+
                     <tr>
                         <td colspan="5"></td>
                         <td>

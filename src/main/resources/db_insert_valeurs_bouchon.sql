@@ -5,7 +5,7 @@ INSERT INTO personne (nom, prenom, sexe, date_anniversaire, email) VALUES
     ('CLEAR', 'James', 'HOMME', null, null),
     ('CHERI', 'Agathe', 'FEMME', null, null);
 
-INSERT INTO utilisateurs (date_inscription, admin, personne_id) VALUES
+INSERT INTO utilisateur (date_inscription, admin, personne_id) VALUES
     (default, true, 1),
     (default, false, 2);
 

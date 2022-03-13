@@ -1,6 +1,6 @@
 package com.github.hugodorne.ressource;
 
-import com.github.hugodorne.model.UtilisateursEntity;
+import com.github.hugodorne.model.UtilisateurEntity;
 import com.github.hugodorne.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +18,13 @@ public class UtilisateurRessource {
     private UtilisateurRepository utilisateurRepository;
 
     @GetMapping
-    public List<UtilisateursEntity> list() {
+    public List<UtilisateurEntity> list() {
         return utilisateurRepository.findAll();
     }
 
     @GetMapping
     @RequestMapping("{id}")
-    public UtilisateursEntity get(@PathVariable int id) {
+    public UtilisateurEntity get(@PathVariable int id) {
         return utilisateurRepository.getById(id);
     }
 
