@@ -1,10 +1,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
     <head>
-        <title>Utilisateur</title>
+        <title>Personne</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,26 +46,26 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="number">#</label>
                         </div>
-                        <input type="text" class="form-control mb-2" id="number" disabled
-                               name="id" value="${personne.id}">
+                        <input type="number" class="form-control mb-2" id="number" disabled
+                               value="${personne.id}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="prenom">Prénom</label>
                         <input type="text" class="form-control mb-2" id="prenom" placeholder="Prénom"
-                               name="prenom" value="${personne.prenom}">
+                               name="personnePrenom" value="${personne.prenom}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="nom">Nom</label>
                         <input type="text" class="form-control mb-2" id="nom" placeholder="Nom"
-                               name="nom" value="${personne.nom}">
+                               name="personneNom" value="${personne.nom}">
                     </div>
 
                     <div class="form-group">
-                        <label class="mb-1" for="dateNaissance">Date de naissance</label>
-                        <input type="date" class="form-control mb-4" id="dateNaissance"
-                               name="dateNaissance" value="${personne.dateAnniversaire}">
+                        <label class="mb-1" for="personneDateNaissance">Date de naissance</label>
+                        <input type="date" class="form-control mb-4" id="personneDateNaissance"
+                               name="personneDateNaissance" value="${personne.dateAnniversaire}" />
                     </div>
 
                     <input type="hidden" name="id" value="${personne.id}">

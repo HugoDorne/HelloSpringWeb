@@ -24,7 +24,6 @@ public class PersonneEntity {
 	private String prenom;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "sexe", nullable = false)
 	private Sexe sexe;
 
 	@Basic

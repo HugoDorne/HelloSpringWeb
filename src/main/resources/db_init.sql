@@ -1,19 +1,9 @@
 -- Création de la base de données
-CREATE TYPE "disponibilite_livre" AS ENUM (
-    'DISPONIBLE',
-    'INDISPONIBLE'
-    );
-
-CREATE TYPE "sexe" AS ENUM (
-    'HOMME',
-    'FEMME'
-    );
-
 CREATE TABLE "personne" (
     "id" SERIAL PRIMARY KEY,
     "nom" varchar(255) NOT NULL,
     "prenom" varchar(255) NOT NULL,
-    "sexe" sexe NOT NULL,
+    "sexe" varchar(255) NOT NULL,
     "date_anniversaire" date,
     "email" varchar(255)
 );
@@ -29,7 +19,7 @@ CREATE TABLE "livre" (
     "id" SERIAL PRIMARY KEY,
     "titre" varchar(255) NOT NULL,
     "auteur" int NOT NULL,
-    "disponibilite" disponibilite_livre NOT NULL DEFAULT 'DISPONIBLE'
+    "disponibilite" varchar(255) NOT NULL DEFAULT 'DISPONIBLE'
 );
 
 CREATE TABLE "emprunt" (
