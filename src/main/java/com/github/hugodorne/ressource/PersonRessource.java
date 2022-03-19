@@ -1,7 +1,7 @@
 package com.github.hugodorne.ressource;
 
-import com.github.hugodorne.model.PersonneEntity;
-import com.github.hugodorne.repository.PersonneRepository;
+import com.github.hugodorne.model.PersonEntity;
+import com.github.hugodorne.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,20 +12,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/personne")
-public class PersonneRessource {
+public class PersonRessource {
 
     @Autowired
-    private PersonneRepository personneRepository;
+    private PersonRepository personRepository;
 
     @GetMapping
-    public List<PersonneEntity> list() {
-        return personneRepository.findAll();
+    public List<PersonEntity> list() {
+        return personRepository.findAll();
     }
 
     @GetMapping
     @RequestMapping("{id}")
-    public PersonneEntity get(@PathVariable int id) {
-        return personneRepository.getById(id);
+    public PersonEntity get(@PathVariable int id) {
+        return personRepository.getById(id);
     }
 
 }

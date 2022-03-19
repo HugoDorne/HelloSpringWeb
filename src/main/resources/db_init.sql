@@ -1,39 +1,17 @@
--- Création de la base de données
-CREATE TABLE "personne" (
-    "id" SERIAL PRIMARY KEY,
-    "nom" varchar(255) NOT NULL,
-    "prenom" varchar(255) NOT NULL,
-    "sexe" varchar(255) NOT NULL,
-    "date_anniversaire" date,
-    "email" varchar(255)
-);
+-- Création des valeurs de test
+INSERT INTO person (person_firstname, person_lastname, person_birthdate, person_sexe, person_email) VALUES
+    ('Hugo', 'DORNE', '1999-08-06', 'HOMME', 'hugodorne@gmail.com'),
+    ('Mickaël', 'FONTES', '1999-12-22', 'HOMME', 'mickafontes@gmail.com'),
+    ('Agathe', 'CHERI', '1999-10-20', 'FEMME', 'agathe.cheri@gmail.com'),
+    ('Lilian', 'FONTAN', '1999-07-07', 'HOMME', 'lilfontan@gmail.com'),
+    ('Christophe', 'GOMIS', '1999-09-01', 'HOMME', 'chrislebg@gmail.com');
 
-CREATE TABLE "utilisateur" (
-    "id" SERIAL PRIMARY KEY,
-    "date_inscription" timestamptz NOT NULL DEFAULT (now()),
-    "admin" boolean NOT NULL DEFAULT false,
-    "personne_id" int NOT NULL
-);
+INSERT INTO book (book_title, book_authors, book_dispo) VALUES
+    ('La Bible', 'Jésus', 'Indisponible'),
+    ('Atomic Habits', 'James Clear', 'Indisponible'),
+    ('Les Misérables', 'Victor Hugo', 'Disponible');
 
-CREATE TABLE "livre" (
-    "id" SERIAL PRIMARY KEY,
-    "titre" varchar(255) NOT NULL,
-    "auteur" int NOT NULL,
-    "disponibilite" varchar(255) NOT NULL DEFAULT 'DISPONIBLE'
-);
-
-CREATE TABLE "emprunt" (
-    "id" SERIAL PRIMARY KEY,
-    "personne_id" int NOT NULL,
-    "livre_id" int NOT NULL,
-    "date_emprunt" timestamptz NOT NULL DEFAULT (now()),
-    "date_retour" timestamptz
-);
-
-ALTER TABLE "utilisateur" ADD FOREIGN KEY ("personne_id") REFERENCES "personne" ("id");
-
-ALTER TABLE "livre" ADD FOREIGN KEY ("auteur") REFERENCES "personne" ("id");
-
-ALTER TABLE "emprunt" ADD FOREIGN KEY ("personne_id") REFERENCES "personne" ("id");
-
-ALTER TABLE "emprunt" ADD FOREIGN KEY ("livre_id") REFERENCES "livre" ("id");
+INSERT INTO borrow (person_id, book_id, borrow_return) VALUES
+    (3,1, null),
+    (1,2, null),
+    (2,3, now());

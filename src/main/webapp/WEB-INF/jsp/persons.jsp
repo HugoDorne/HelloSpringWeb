@@ -1,11 +1,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
     <head>
-        <title>Utilisateurs</title>
+        <title>Personnes</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,7 +18,7 @@
     <body class="bg-white">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <a class="navbar-brand ms-2 m-0" href="accueil">
+            <a class="navbar-brand ms-2 m-0" href="home">
                 <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
@@ -28,9 +28,9 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav m-auto" style="padding-right: 7rem">
-                    <a class="nav-item nav-link" href="utilisateurs">Utilisateurs</a>
-                    <a class="nav-item nav-link" href="livres">Livres</a>
-                    <a class="nav-item nav-link" href="emprunts">Emprunts</a>
+                    <a class="nav-item nav-link" href="persons">Personnes</a>
+                    <a class="nav-item nav-link" href="books">Livres</a>
+                    <a class="nav-item nav-link" href="borrows">Emprunts</a>
                 </div>
             </div>
         </nav>
@@ -52,20 +52,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="u" items="${utilisateurs}">
+                    <c:forEach var="p" items="${persons}">
                     <tr>
-                        <th scope="row">${u.id}</th>
-                        <td>${u.personneId.prenom}</td>
-                        <td>${u.personneId.nom}</td>
-                        <td>${u.personneId.sexe.label}</td>
-                        <td><fmt:formatDate value="${u.personneId.dateAnniversaire}" pattern="dd/MM/yyyy" /></td>
+                        <th scope="row">${p.personId}</th>
+                        <td>${p.personFirstname}</td>
+                        <td>${p.personLastname}</td>
+                        <td>${p.personSexe.label}</td>
+                        <td><fmt:formatDate value="${p.personBirthdate}" pattern="dd/MM/yyyy" /></td>
                         <td>
                             <form action="#" method="post">
-                                <input type="hidden" name="id" value="${u.id}"/>
-                                <button formaction="editPersonne" class="me-2" style="background: transparent; border: none !important;">
+                                <input type="hidden" name="id" value="${p.personId}"/>
+                                <button formaction="editPerson" class="me-2" style="background: transparent; border: none !important;">
                                     <svg fill="#000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M17.263 2.177a1.75 1.75 0 012.474 0l2.586 2.586a1.75 1.75 0 010 2.474L19.53 10.03l-.012.013L8.69 20.378a1.75 1.75 0 01-.699.409l-5.523 1.68a.75.75 0 01-.935-.935l1.673-5.5a1.75 1.75 0 01.466-.756L14.476 4.963l2.787-2.786zm-2.275 4.371l-10.28 9.813a.25.25 0 00-.067.108l-1.264 4.154 4.177-1.271a.25.25 0 00.1-.059l10.273-9.806-2.94-2.939zM19 8.44l2.263-2.262a.25.25 0 000-.354l-2.586-2.586a.25.25 0 00-.354 0L16.061 5.5 19 8.44z"></path></svg>
                                 </button>
-                                <button formaction="deleteUtilisateur" style="background: transparent; border: none !important;">
+                                <button formaction="deletePerson" style="background: transparent; border: none !important;">
                                     <svg fill="#FF0000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm8.036-4.024a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path></svg>
                                 </button>
                             </form>
@@ -75,13 +75,13 @@
 
                     <tr>
                         <td colspan="5"></td>
-                        <form action="#" method="post">
-                            <td>
-                                <button formaction="createUtilisateur" style="background: transparent; border: none !important;">
+                        <td>
+                            <form action="#" method="post">
+                                <button formaction="createPerson" style="background: transparent; border: none !important;">
                                     <svg style="cursor:pointer;" fill="#00A1FF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12.75 7.75a.75.75 0 00-1.5 0v3.5h-3.5a.75.75 0 000 1.5h3.5v3.5a.75.75 0 001.5 0v-3.5h3.5a.75.75 0 000-1.5h-3.5v-3.5z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg>
                                 </button>
-                            </td>
-                        </form>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

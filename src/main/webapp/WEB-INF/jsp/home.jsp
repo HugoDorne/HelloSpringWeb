@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
     <head>
@@ -9,7 +9,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link href="<spring:url value="/resources/css/global.css" />" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
               rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
@@ -18,7 +17,7 @@
     <body class="bg-white vh-100">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <a class="navbar-brand ms-2 m-0" href="accueil">
+            <a class="navbar-brand ms-2 m-0" href="home">
                 <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
@@ -28,9 +27,9 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav m-auto" style="padding-right: 7rem">
-                    <a class="nav-item nav-link" href="utilisateurs">Utilisateurs</a>
-                    <a class="nav-item nav-link" href="livres">Livres</a>
-                    <a class="nav-item nav-link" href="emprunts">Emprunts</a>
+                    <a class="nav-item nav-link" href="persons">Personnes</a>
+                    <a class="nav-item nav-link" href="books">Livres</a>
+                    <a class="nav-item nav-link" href="borrows">Emprunts</a>
                 </div>
             </div>
         </nav>

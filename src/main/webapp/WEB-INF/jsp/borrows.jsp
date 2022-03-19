@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
     <head>
@@ -17,7 +17,7 @@
     <body class="bg-white">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <a class="navbar-brand ms-2 m-0" href="accueil">
+            <a class="navbar-brand ms-2 m-0" href="home">
                 <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
@@ -27,9 +27,9 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav m-auto" style="padding-right: 7rem">
-                    <a class="nav-item nav-link" href="utilisateurs">Utilisateurs</a>
-                    <a class="nav-item nav-link" href="livres">Livres</a>
-                    <a class="nav-item nav-link" href="emprunts">Emprunts</a>
+                    <a class="nav-item nav-link" href="persons">Personnes</a>
+                    <a class="nav-item nav-link" href="books">Livres</a>
+                    <a class="nav-item nav-link" href="borrows">Emprunts</a>
                 </div>
             </div>
         </nav>
@@ -52,13 +52,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="e" items="${emprunts}">
+                    <c:forEach var="b" items="${borrows}">
                     <tr>
-                        <th scope="row">${e.id}</th>
-                        <td>${e.personne.prenom += " " += e.personne.nom}</td>
-                        <td>${"\"" += e.livre.titre += "\" de " += e.livre.auteur.prenom += " " += e.livre.auteur.nom}</td>
-                        <td>${e.dateEmprunt}</td>
-                        <td>${e.dateRetour}</td>
+                        <th scope="row">${b.borrowId}</th>
+                        <td>${b.personId.personFirstname += " " += b.personId.personLastname}</td>
+                        <td>${"\"" += b.bookId.bookTitle += "\" de " += b.bookId.bookAuthors}</td>
+                        <td>${b.borrowDate}</td>
+                        <td>${b.borrowReturn}</td>
                         <td>
                             <svg class="me-2" style="cursor:pointer;" fill="#00FF00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
                             <svg style="cursor:pointer;" fill="#FF0000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm8.036-4.024a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path></svg>

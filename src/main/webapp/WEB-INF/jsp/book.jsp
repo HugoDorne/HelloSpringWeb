@@ -1,11 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
     <head>
-        <title>Personne</title>
+        <title>Livre</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,7 +17,7 @@
     <body class="bg-white">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <a class="navbar-brand ms-2 m-0" href="accueil">
+            <a class="navbar-brand ms-2 m-0" href="home">
                 <img src="<spring:url value="/resources/img/LogoCN_Q.png" />" height="30" alt="Bouton accueil">
             </a>
 
@@ -28,9 +27,9 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav m-auto" style="padding-right: 7rem">
-                    <a class="nav-item nav-link" href="utilisateurs">Utilisateurs</a>
-                    <a class="nav-item nav-link" href="livres">Livres</a>
-                    <a class="nav-item nav-link" href="emprunts">Emprunts</a>
+                    <a class="nav-item nav-link" href="persons">Personnes</a>
+                    <a class="nav-item nav-link" href="books">Livres</a>
+                    <a class="nav-item nav-link" href="borrows">Emprunts</a>
                 </div>
             </div>
         </nav>
@@ -39,36 +38,26 @@
     <div class="d-flex" style="height: 89vh">
         <div class="card w-50 m-auto my-auto">
             <div class="card-body shadow text-center">
-                <h1 class="mb-4">Création / Modification de personne</h1>
+                <h1 class="mb-4">Création / Modification de livre</h1>
 
-                <form class="text-start" action="savePersonne" method="post">
+                <form class="text-start">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="number">#</label>
                         </div>
-                        <input type="number" class="form-control mb-2" id="number" disabled
-                               value="${personne.id}">
+                        <input type="text" class="form-control mb-2" id="number" value="127" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label class="mb-1" for="prenom">Prénom</label>
-                        <input type="text" class="form-control mb-2" id="prenom" placeholder="Prénom"
-                               name="personnePrenom" value="${personne.prenom}">
+                        <label class="mb-1" for="titre">Titre</label>
+                        <input type="text" class="form-control mb-2" id="titre" placeholder="Titre">
                     </div>
 
                     <div class="form-group">
-                        <label class="mb-1" for="nom">Nom</label>
-                        <input type="text" class="form-control mb-2" id="nom" placeholder="Nom"
-                               name="personneNom" value="${personne.nom}">
+                        <label class="mb-1" for="auteur">Auteur</label>
+                        <input type="text" class="form-control mb-4" id="auteur" placeholder="Auteur">
                     </div>
 
-                    <div class="form-group">
-                        <label class="mb-1" for="personneDateNaissance">Date de naissance</label>
-                        <input type="date" class="form-control mb-4" id="personneDateNaissance"
-                               name="personneDateNaissance" value="${personne.dateAnniversaire}" />
-                    </div>
-
-                    <input type="hidden" name="id" value="${personne.id}">
                     <button type="submit" class="btn btn-primary w-100">Sauvegarder</button>
                 </form>
             </div>

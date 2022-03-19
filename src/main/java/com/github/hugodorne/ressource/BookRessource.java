@@ -1,7 +1,7 @@
 package com.github.hugodorne.ressource;
 
-import com.github.hugodorne.model.EmpruntEntity;
-import com.github.hugodorne.repository.EmpruntRepository;
+import com.github.hugodorne.model.BookEntity;
+import com.github.hugodorne.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/emprunt")
-public class EmpruntRessource {
+@RequestMapping("api/v1/livre")
+public class BookRessource {
 
     @Autowired
-    private EmpruntRepository empruntRepository;
+    private BookRepository bookRepository;
 
     @GetMapping
-    public List<EmpruntEntity> list() {
-        return empruntRepository.findAll();
+    public List<BookEntity> list() {
+        return bookRepository.findAll();
     }
 
     @GetMapping
     @RequestMapping("{id}")
-    public EmpruntEntity get(@PathVariable int id) {
-        return empruntRepository.getById(id);
+    public BookEntity get(@PathVariable int id) {
+        return bookRepository.getById(id);
     }
 
 }
