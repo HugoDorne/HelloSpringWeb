@@ -71,7 +71,7 @@ public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /**
-     * Méthode répondant à un GET("index").
+     * Méthode répondant à un GET.
      *
      * @return la page login.jsp, la page de connexion
      */

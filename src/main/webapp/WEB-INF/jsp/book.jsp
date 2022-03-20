@@ -40,22 +40,25 @@
             <div class="card-body shadow text-center">
                 <h1 class="mb-4">Création / Modification de livre</h1>
 
-                <form class="text-start">
+                <form class="text-start" action="saveBook" method="post">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="number">#</label>
                         </div>
-                        <input type="text" class="form-control mb-2" id="number" value="127" disabled>
+                        <input type="text" class="form-control mb-2" id="number" disabled
+                               value="${book.bookId}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="titre">Titre</label>
-                        <input type="text" class="form-control mb-2" id="titre" placeholder="Titre">
+                        <input type="text" class="form-control mb-2" id="titre" placeholder="Titre"
+                            name="bookTitle" value="${book.bookTitle}">
                     </div>
 
                     <div class="form-group">
                         <label class="mb-1" for="auteur">Auteur</label>
-                        <input type="text" class="form-control mb-4" id="auteur" placeholder="Auteur">
+                        <input type="text" class="form-control mb-4" id="auteur" placeholder="Auteur"
+                               name="bookAuthors" value="${book.bookTitle}">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Sauvegarder</button>
