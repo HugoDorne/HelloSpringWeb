@@ -21,7 +21,7 @@ import java.util.Optional;
 @Controller
 public class BookController {
 
-    private final Logger logger = LoggerFactory.getLogger(PersonController.class);
+    private final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     @Autowired
     private BookRepository bookRepository;
@@ -76,7 +76,7 @@ public class BookController {
      */
     @PostMapping("saveBook")
     public String saveBook(HttpServletRequest request) {
-        String idStr = request.getParameter("id");
+        String idStr = request.getParameter("bookId");
         String bookTitle = request.getParameter("bookTitle");
         String bookAuthors = request.getParameter("bookAuthors");
 
@@ -133,7 +133,7 @@ public class BookController {
             }
             return "redirect:books";
         } catch (NumberFormatException e) {
-            logger.warn(Arrays.toString(e.getStackTrace()));
+            logger.error(e.getMessage());
             return "redirect:books";
         }
     }

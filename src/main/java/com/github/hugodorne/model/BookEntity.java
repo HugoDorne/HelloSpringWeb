@@ -24,7 +24,7 @@ public class BookEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "book_dispo", nullable = false, length = 63)
-	private Disponibilite bookDispo;
+	private Disponibilite bookDispo = Disponibilite.DISPONIBLE;
 
 
 	public int getBookId() {
