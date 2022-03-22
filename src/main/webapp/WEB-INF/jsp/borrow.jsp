@@ -43,7 +43,8 @@
                 <form class="text-start">
                     <div class="form-group">
                         <label for="emprunteur" class="form-label">Emprunteur</label>
-                        <input class="form-control" list="emprunteurOptions" id="emprunteur" placeholder="Prénom NOM">
+                        <input class="form-control" list="emprunteurOptions" id="emprunteur" placeholder="Prénom NOM"
+                               name="borrowPerson" value="${borrow.personId}">
                         <datalist id="emprunteurOptions">
                             <option value="Hugo DORNE">
                             <option value="Mickaël FONTES">
@@ -52,16 +53,12 @@
 
                     <div class="form-group">
                         <label for="livre" class="form-label">Livre emprunté</label>
-                        <input class="form-control" list="livreOptions" id="livre" placeholder="Prénom NOM">
+                        <input class="form-control" list="livreOptions" id="livre" placeholder="Prénom NOM"
+                               name="borrowBook" value="${borrow.bookId}">
                         <datalist id="livreOptions">
                             <option value="La Bible, Jésus">
                             <option value="Atomic Habits, Michael Scott">
                         </datalist>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="mb-1" for="dateEmprunt">Date de l'emprunt</label>
-                        <input type="date" class="form-control mb-4" id="dateEmprunt">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Sauvegarder</button>
