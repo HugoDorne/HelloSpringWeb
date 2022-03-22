@@ -46,9 +46,8 @@
                         <th scope="col" style="width: 7.5%">#</th>
                         <th scope="col" style="width: 25%">Emprunteur</th>
                         <th scope="col" style="width: 25%">Livre</th>
-                        <th scope="col" style="width: 15%">Date de l'emprunt</th>
-                        <th scope="col" style="width: 15%">Date de retour</th>
-                        <th scope="col" style="width: 12.5%"></th>
+                        <th scope="col" style="width: 21.25%">Date de l'emprunt</th>
+                        <th scope="col" style="width: 21.25%">Date de retour</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,23 +57,25 @@
                         <td>${b.personId.personFirstname += " " += b.personId.personLastname}</td>
                         <td>${"\"" += b.bookId.bookTitle += "\" de " += b.bookId.bookAuthors}</td>
                         <td>${b.borrowDate}</td>
-                        <td>${b.borrowReturn}</td>
                         <td>
-                            <form action="#" method="post">
-                                <input type="hidden" name="id" value="${b.borrowId}"/>
-                                <button formaction="editBorrow" style="background: transparent; border: none !important;">
-                                    <svg style="cursor:pointer;" fill="#00FF00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
-                                </button>
-                                <button formaction="deleteBorrow" style="background: transparent; border: none !important;">
-                                    <svg style="cursor:pointer;" fill="#FF0000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm8.036-4.024a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path></svg>
-                                </button>
-                            </form>
+                            <c:choose>
+                                <c:when test="${empty b.borrowReturn}">
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="borrowId" value="${b.borrowId}"/>
+                                        <button formaction="returnBorrow" class="btn btn-primary">Rendre l'emprunt</button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    ${b.borrowReturn}
+                                </c:otherwise>
+                            </c:choose>
+
                         </td>
                     </tr>
                     </c:forEach>
 
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="4"></td>
                         <td>
                             <form action="#" method="post">
                                 <button formaction="createBorrow" style="background: transparent; border: none !important;">

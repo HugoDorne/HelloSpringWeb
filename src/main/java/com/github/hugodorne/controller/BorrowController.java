@@ -1,7 +1,7 @@
 package com.github.hugodorne.controller;
 
+import com.github.hugodorne.enumeration.Disponibilite;
 import com.github.hugodorne.model.BookEntity;
-import com.github.hugodorne.model.BorrowEntity;
 import com.github.hugodorne.model.BorrowEntity;
 import com.github.hugodorne.model.PersonEntity;
 import com.github.hugodorne.repository.BookRepository;
@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
+import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The type Borrow controller.
@@ -37,14 +36,32 @@ public class BorrowController {
     @Autowired
     private PersonRepository personRepository;
 
-    /**
-     * Méthode répondant à un GET("borrow").
-     *
-     * @return la page borrow.jsp qui montre les attributs d'un emprunt
-     */
-    @GetMapping("borrow")
-    public String getBorrow(){
-        return "borrow";
+    public static class Model {
+
+        public List<BookEntity> books;
+
+        public List<PersonEntity> persons;
+
+        public Model(List<BookEntity> books, List<PersonEntity> persons) {
+            this.books = books;
+            this.persons = persons;
+        }
+
+        public List<BookEntity> getBooks() {
+            return books;
+        }
+
+        public void setBooks(List<BookEntity> books) {
+            this.books = books;
+        }
+
+        public List<PersonEntity> getPersons() {
+            return persons;
+        }
+
+        public void setPersons(List<PersonEntity> persons) {
+            this.persons = persons;
+        }
     }
 
     /**
@@ -59,24 +76,42 @@ public class BorrowController {
     }
 
     /**
-     * Méthode répondant à un POST("editBorrow").
+     * Méthode répondant à un POST("returnBorrow").
      *
      * @param request la requête
-     * @return la page borrow.jsp
+     * @return la page borrows.jsp
      */
-    @PostMapping("editBorrow")
-    public ModelAndView editBorrow(HttpServletRequest request) {
-        String idStr = request.getParameter("id");
-        int id;
+    @PostMapping("returnBorrow")
+    public String returnBorrow(HttpServletRequest request) {
+        String idStr = request.getParameter("borrowId");
 
         try {
-            id = Integer.parseInt(idStr);
-            return new ModelAndView("borrow", "borrow", borrowRepository.getById(id));
+            var id = Integer.parseInt(idStr);
+
+            var borrow = borrowRepository.getById(id);
+            borrow.setBorrowReturn(Instant.now());
+            borrow.getBookId().setBookDispo(Disponibilite.DISPONIBLE);
+
+            borrowRepository.save(borrow);
+
+            return "redirect:borrows";
 
         } catch (NumberFormatException e) {
             logger.warn(e.toString());
-            return getBorrows();
+            return "redirect:borrows";
         }
+    }
+
+    /**
+     * Méthode répondant à un POST("createBorrow").
+     *
+     * @return la page borrow.jsp
+     */
+    @PostMapping("createBorrow")
+    public ModelAndView createBorrow() {
+
+        return new ModelAndView("borrow", "model",
+                new Model(bookRepository.findAll(), personRepository.findAll()));
     }
 
     /**
@@ -92,9 +127,11 @@ public class BorrowController {
 
         //Création Personne
         var borrow = new BorrowEntity();
+        borrow.setBorrowDate(Instant.now());
 
         PersonEntity person = personRepository.getById(Integer.valueOf(borrowPerson));
         BookEntity book = bookRepository.getById(Integer.valueOf(borrowBook));
+        book.setBookDispo(Disponibilite.INDISPONIBLE);
 
         borrow.setPersonId(person);
         borrow.setBookId(book);
@@ -104,40 +141,4 @@ public class BorrowController {
         return "redirect:borrows";
     }
 
-    /**
-     * Méthode répondant à un POST("deleteBorrow").
-     *
-     * @param request la requête
-     * @return la page borrows.jsp
-     */
-    @PostMapping("deleteBorrow")
-    public String deleteBorrow(HttpServletRequest request) {
-        String idStr = request.getParameter("id");
-
-        try {
-            var id = Integer.parseInt(idStr);
-            Optional<BorrowEntity> borrowOpt = borrowRepository.findById(id);
-
-            if (borrowOpt.isPresent()) {
-                BorrowEntity borrow = borrowOpt.get();
-
-                borrowRepository.delete(borrow);
-            }
-            return "redirect:borrows";
-        } catch (NumberFormatException e) {
-            logger.error(e.getMessage());
-            return "redirect:borrows";
-        }
-    }
-
-    /**
-     * Méthode répondant à un POST("createBorrow").
-     *
-     * @return la page borrow.jsp
-     */
-    @PostMapping("createBorrow")
-    public ModelAndView createBorrow() {
-        var borrow = new BorrowEntity();
-        return new ModelAndView("borrow", "borrow", borrow);
-    }
 }

@@ -40,24 +40,28 @@
             <div class="card-body shadow text-center">
                 <h1 class="mb-4">Création d'un emprunt</h1>
 
-                <form class="text-start">
-                    <div class="form-group">
+                <form action="saveBorrow" method="post" class="text-start">
+                    <div class="form-group mb-2">
                         <label for="emprunteur" class="form-label">Emprunteur</label>
                         <input class="form-control" list="emprunteurOptions" id="emprunteur" placeholder="Prénom NOM"
-                               name="borrowPerson" value="${borrow.personId}">
+                               name="borrowPerson" autocomplete="off">
                         <datalist id="emprunteurOptions">
-                            <option value="Hugo DORNE">
-                            <option value="Mickaël FONTES">
+                            <c:forEach var="person" items="${model.persons}">
+                                <option value="${person.personId}" label="${person.personFirstname} ${person.personLastname}"></option>
+                            </c:forEach>
                         </datalist>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-4">
                         <label for="livre" class="form-label">Livre emprunté</label>
                         <input class="form-control" list="livreOptions" id="livre" placeholder="Prénom NOM"
-                               name="borrowBook" value="${borrow.bookId}">
+                               name="borrowBook" autocomplete="off">
                         <datalist id="livreOptions">
-                            <option value="La Bible, Jésus">
-                            <option value="Atomic Habits, Michael Scott">
+                            <c:forEach var="book" items="${model.books}">
+                                <c:if test="${book.bookDispo.label == 'Disponible'}">
+                                    <option value="${book.bookId}" label="${book.bookTitle} de ${book.bookAuthors}"></option>
+                                </c:if>
+                            </c:forEach>
                         </datalist>
                     </div>
 
